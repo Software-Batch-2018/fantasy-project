@@ -1,32 +1,29 @@
-const express = require('express')
+const express = require("express");
 const app = express();
+const dotenv = require("dotenv");
+const userRoute = require("./routes/user");
+const playerRoute = require("./routes/player");
+const teamRoute = require("./routes/team");
+const { connectDB } = require("./config/db");
 
-const mongoose = require('mongoose')
+dotenv.config();
+const PORT = 4000;
 
-const mongoURI = "mongodb+srv://pubois:pubois123@fantasy.xneou.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-const PORT = 4000
+// MongoDB connection here.
+connectDB();
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true, 
-  useUnifiedTopology: true, 
-  useCreateIndex: true
-})
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log('Database connected...');
-}).catch(err => {
-    console.log('Connection failed...')
+//Routes here
+app.use("/api/user", userRoute);
+app.use("/api/player", playerRoute);
+app.use("/api/team", teamRoute);
+app.use("/", (req, res, next) => {
+  res.status(200).json({ Message: "This is home route" });
 });
 
-
-
-
-app.get('/', (req, res)=>{
-    res.send('Hello world')
-})
-
-
-const server = app.listen(PORT, ()=>{
-    console.log(`Listening in Port ${PORT}`)
-})
+//Listen to server
+app.listen(PORT, () => {
+  console.log(`Listening in Port ${PORT}`);
+});
