@@ -4,8 +4,7 @@ const api = require('./route/api')
 
 const PORT = 4000
 
-
-
+app.use(express.json());
 
 app.use('/api', api)
 
