@@ -1,0 +1,47 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="/css/header.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="device">
+	<div class="container">
+		<button id="burger" class="open-main-nav">
+			<span class="burger"></span>
+			<span class="burger-text">Menu</span>
+		</button>
+		<nav class="main-nav" id="main-nav">
+			<ul>
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="#">Create Fantasy</a>
+				</li>
+				<li>
+					<a href="/rank">Rank</a>
+				</li>
+				<li>
+					<a href="#">About Us</a>
+				</li>
+				<li>
+					<form action="/users/logout?_method=DELETE" method="POST" class="w-full max-w-lg">
+						<button type="submit" name="submit" class="btn-logout"><a>Logout</a></button>
+					</form>
+				</li>
+			</ul>
+		</nav>
+		
+
+<!-- partial -->
+  <script  src="/js/index.js"></script>
+
+</body>
+</html>
