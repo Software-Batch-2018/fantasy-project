@@ -2,6 +2,7 @@ const dbOperation = require('../controller/teamController')
 var express = require('express')
 const router = express.Router()
 
+const { auth, notAuth } = require('../middleware/auth');
 
 router.get('/teams', (req, res)=>{
     dbOperation.getTeam().then(result=>{
@@ -9,7 +10,7 @@ router.get('/teams', (req, res)=>{
     })
 })
 
-router.get('/Players/:country1/:country2', (req, res)=>{
+router.get('/Players/:country1/:country2', auth, (req, res)=>{
     countryName1 = req.params.country1
     countryName2 = req.params.country2
 
@@ -25,9 +26,15 @@ router.get('/Players/:country', (req, res)=>{
     })
 })
 
-router.get('/matches/:date', (req, res)=>{
+router.get('/matches/:date', auth, (req, res)=>{
     date = req.params.date
     dbOperation.getMatches(date).then(result=>{
+        res.json(result)
+    })
+})
+
+router.get('/rank', (req, res)=>{
+    dbOperation.getRanks().then(result=>{
         res.json(result)
     })
 })

@@ -31,20 +31,18 @@ router.post('/register', notAuth, async (req,res) => {
             if (rows.recordset.length) {
                 res.redirect('/users/login');
             } else {
-                // if there is no user with that username
-                // create the user
+                // if there is no user with that username create the user
                 var user = {
                     user: username,
                     password: password  
                 };
                 request
                 .query(`INSERT INTO users (username, password) values ('${user.user}', '${user.password}'); SELECT SCOPE_IDENTITY() AS user_id;`, function(err, rows) {
-                  user.id = rows.recordset[0].user_id;
                   res.redirect('/users/login');
                 });
             }
         });
-    } catch (e) {
+    }catch (e) {
         console.log(e)
         res.redirect('/users/register');
     }

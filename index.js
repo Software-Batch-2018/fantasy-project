@@ -9,6 +9,7 @@ const flash = require('express-flash');
 const methodOverride = require('method-override');
 
 
+//port
 const PORT = 4000
 
 //db
@@ -22,7 +23,7 @@ app.set('view engine', 'ejs');
 // express function
 app.use(express.urlencoded( { extended : false }));
 app.use(express.json());
-
+app.use(express.static(__dirname + '/public'));
 
 
 //session config
@@ -52,7 +53,7 @@ app.use('/users', user)
 
 
 
-
+//server config
 app.listen(PORT, ()=>{
     console.log(`Listening in Port ${PORT}`)
 })

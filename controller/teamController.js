@@ -53,11 +53,22 @@ async function  getMatches(date){
     }
 }
 
+async function  getRanks(){
+    try{
+        let pool = await sql.connect(config)
+        let teams = await pool.request().query("select username, points from Points as p inner join users as u on p.user_id = u.user_id")
+        return teams.recordset
+    }catch(err){
+        console.log(err)
+    }
+}
+
 
 module.exports = {
     getTeam : getTeam,
     getTeamPlayers: getTeamPlayers,
     getMatches: getMatches,
-    getMatchPlayers: getMatchPlayers
+    getMatchPlayers: getMatchPlayers,
+    getRanks: getRanks
 
 }
