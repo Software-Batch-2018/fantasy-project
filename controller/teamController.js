@@ -25,7 +25,26 @@ async function  getTeamPlayers(countryName){
     }
 }
 
+async function  getMatches(date){
+    try{
+        let pool = await sql.connect(config)
+        let teams = await pool.request().query(`SELECT Match_id,c.teamName as team1, c2.teamName as team2, Time FROM Matches as m 
+        inner join Country as c 
+        on m.Team1_id = c.teamId 
+        inner join Country as c2 
+        on m.Team2_id = c2.teamId  
+        where m.Date='${date}'
+        `)
+        return teams.recordset
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
 module.exports = {
     getTeam : getTeam,
-    getTeamPlayers: getTeamPlayers
+    getTeamPlayers: getTeamPlayers,
+    getMatches: getMatches
+
 }
