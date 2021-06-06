@@ -3,35 +3,56 @@ const passport = require('passport');
 const app = express()
 var session = require('express-session');
 const api = require('./route/api')
-var cookieParser  = require('cookie-parser');
-var bodyParser    = require('body-parser');
-var flash         = require('connect-flash');
+const index = require('./route/index')
+const user = require('./route/user')
+const flash = require('express-flash');
+const methodOverride = require('method-override');
+
+
 const PORT = 4000
 
+//db
+require('./config/dbconfig');
+
+
+
+//view engine
+app.set('view engine', 'ejs');
+
+// express function
+app.use(express.urlencoded( { extended : false }));
 app.use(express.json());
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
-app.use(bodyParser.json());
 
-app.set('view engine', 'jade'); // set up jade for templating
-app.use(passport.initialize());
 
-require('./auth/session')(passport)
-// required for passport
+
+//session config
 app.use(session({
-	secret: 'vidyapathaisalwaysrunning',
-	resave: true,
-	saveUninitialized: true
- } )); 
+    secret : 'kusaljr',
+    resave : false,
+    saveUninitialized : false
+}));
+
+
+//passport config
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
-// session secret
+app.use(methodOverride('_method'));
+
+
+
+//api route
 app.use('/api', api)
 
-app.get('/', function(req, res) {
-    res.render('index.jade');
-});
+//index route
+app.use('/', index)
+
+//user route
+app.use('/users', user)
+
+
+
+
 app.listen(PORT, ()=>{
     console.log(`Listening in Port ${PORT}`)
 })
