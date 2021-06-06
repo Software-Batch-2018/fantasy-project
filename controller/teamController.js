@@ -13,7 +13,6 @@ async function  getTeam(){
 
 async function  getTeamPlayers(countryName){
     try{
-
         let pool = await sql.connect(config)
         let team_Id = await pool.request().query(`SELECT teamId from Country where teamName = '${countryName}'`)
         var id = team_Id.recordset
