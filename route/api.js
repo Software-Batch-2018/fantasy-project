@@ -10,7 +10,7 @@ router.get('/teams', (req, res)=>{
     })
 })
 
-router.get('/Players/:country1/:country2', auth, (req, res)=>{
+router.get('/Players/:country1/:country2', (req, res)=>{
     countryName1 = req.params.country1
     countryName2 = req.params.country2
 

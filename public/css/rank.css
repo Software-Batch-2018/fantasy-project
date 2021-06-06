@@ -8,9 +8,8 @@
 .leaderboard header {
   --start: 15%;
   height: 130px;
-  background-image: repeating-radial-gradient(circle at var(--start), transparent 0%, transparent 10%, rgba(54, 89, 219, 0.33) 10%, rgba(54, 89, 219, 0.33) 17%), linear-gradient(to right, #5b7cfa, #3659db);
-  color: #fff;
-  position: relative;
+  background-color: #7ee8fa;
+	background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);  position: relative;
   overflow: hidden;
 }
 .leaderboard header .leaderboard__title {
@@ -38,8 +37,7 @@
   transform: translateY(-2px);
 }
 .leaderboard header .leaderboard__icon {
-  fill: #fff;
-  opacity: 0.35;
+  fill: black;
   width: 50px;
   position: absolute;
   top: 50%;

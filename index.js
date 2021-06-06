@@ -7,7 +7,7 @@ const index = require('./route/index')
 const user = require('./route/user')
 const flash = require('express-flash');
 const methodOverride = require('method-override');
-
+const cors = require('cors')
 
 //port
 const PORT = 4000
@@ -24,7 +24,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded( { extended : false }));
 app.use(express.json());
 app.use(express.static(__dirname + '/public'));
-
+app.use(cors())
 
 //session config
 app.use(session({

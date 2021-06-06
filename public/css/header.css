@@ -27,7 +27,8 @@
     bottom: 0;
     left: 0;
     right: -15px;
-    background: #FEDC2A;
+    background-color: #7ee8fa;
+	background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
     transform-origin: 0 0;
     transform: skew(-14deg) translateX(-120%);
     transition: all .275s .1s;
@@ -193,63 +194,6 @@ body {
 	align-items: center;
 }
 
-/* Slow motion button */
-[id="slowmo"] {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	padding: 10px;
-	border: 0;
-	font-size: 1rem;
-	background: #FEDC2A;
-	color: #5A3B5D;
-	font-weight: bold;
-	cursor: pointer;
-	transition: all .275s;
-}
-
-[id="slowmo"] span {
-	display: block;
-	font-weight: normal;
-}
-
-[id="slowmo"]:hover,
-[id="slowmo"]:focus {
-	background: #5A3B5D;
-	color: #FEDC2A;
-}
-
-[id="slowmo"].is-slowmo span:after {
-	content: 'Activated';
-	display: block;
-	font-weight: bold;
-}
-
-/* When slowmotion is activated */
-
-.is-slowmo + .device .open-main-nav .burger,
-.is-slowmo + .device .open-main-nav .burger:before,
-.is-slowmo + .device .open-main-nav .burger:after,
-.is-slowmo + .device .main-nav,
-.is-slowmo + .device .main-nav::before,
-.is-slowmo + .device .main-nav a {
-	transition-duration: 3s;
-}
-.is-slowmo + .device .main-nav li:nth-child(1) a {
-	transition-delay: 1750ms
-}
-.is-slowmo + .device .main-nav li:nth-child(2) a {
-	transition-delay: 2250ms
-}
-.is-slowmo + .device .main-nav li:nth-child(3) a {
-	transition-delay: 2750ms
-}
-.is-slowmo + .device .main-nav li:nth-child(4) a {
-	transition-delay: 3250ms
-}
-.is-slowmo + .device .main-nav li:nth-child(5) a {
-	transition-delay: 3750ms
-}
 
 /* Notice */
 .notice {
