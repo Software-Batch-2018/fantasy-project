@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy</title>
+</head>
+<link rel="stylesheet" href="css/fantasy.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<body>
+    <%- include('./header') %>
+    <section class="main-body">
+        <div class="info">
+
+        </div>
+
+        <div class="formation">
+            <div class="pitch">
+                <div class="top-box"></div>
+                <div class="top-inner-box"></div>
+                <div class="centre-circle"></div>
+                <div class="centre-line"></div>
+                <div class="bottom-box"></div>
+                <div class="bottom-inner-box"></div>
+                <div class="player-card">
+                    <div class="player-card-section">
+                        <div class="FW">
+                            <div class="player" id="FW" onclick="myFunction(this.id)">FW1</div>
+                        </div>
+                    </div>
+                    <div class="player-card-section">
+                        <div class="MF">
+                            <div class="player" id="MF" onclick="myFunction(this.id)">MF</div>
+                        </div>
+                    </div>
+                    <div class="player-card-section">
+                        <div class="DF">
+                            <div class="player" id="DF" onclick="myFunction(this.id)">DF1</div>
+                        </div>
+                    </div>
+                    <div class="player-card-section">
+                        <div class="GK">
+                            <div class="player" id="GK" onclick="myFunction(this.id)">GK</div>
+                        </div>
+                        <div class="popup">
+                            <span class="popuptext" id="myPopup"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+    <script src="js/fantasy.js"></script>
+
+</body>
+</html>
