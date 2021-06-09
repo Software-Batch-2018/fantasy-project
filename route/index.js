@@ -36,7 +36,16 @@ router.get('/fantasy/:team1/:team2', (req, res)=>{
 
 router.get('/team', (req, res)=>{
     res.render('components/team', {GK:filterbyPosition(user_data, 'GK'),DF:filterbyPosition(user_data, 'DF'), MF: filterbyPosition(user_data, 'MF'), FW:filterbyPosition(user_data, 'FW')})
+})
 
+router.get('/fixtures', (req, res)=>{
+    fetch('http://localhost:4000/api/matches/2021-06-23')
+    .then(res => res.json())
+    .then(matches => {
+        console.log(matches)
+        res.render('components/fixtures', {matches: matches})
+    }); 
+    
 })
 
 router.post('/fantasy', (req, res)=>{

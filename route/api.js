@@ -26,7 +26,7 @@ router.get('/Players/:country', (req, res)=>{
     })
 })
 
-router.get('/matches/:date', auth, (req, res)=>{
+router.get('/matches/:date', (req, res)=>{
     date = req.params.date
     dbOperation.getMatches(date).then(result=>{
         res.json(result)

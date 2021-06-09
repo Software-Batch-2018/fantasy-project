@@ -75,7 +75,220 @@
 </div>
 </div>
 
-    <script src="/js/fantasy.js"></script>
+
+<script>
+    var players = <%-JSON.stringify(players)%>;
+
+    let GK = document.getElementById('goal')
+    let DF = document.getElementById('def')
+    let MF = document.getElementById('mid')
+    let FW = document.getElementById('forward')
+
+    let price_div = document.getElementById('fantasy-price')
+    let price = document.getElementById('fantasy-price').textContent
+    price = parseFloat(price)
+
+
+    var map = new Map()
+    var user_pick = '{"theTeam":[]}'
+
+
+    function filterbyPosition(position){
+        var result = players.filter( element => element.Player_position ==position)
+        return result
+    }
+
+    function myFunction(id) {
+        var popup = document.getElementById("myPopup");
+        var new_id = id.substring(0, 2)
+        var filtered_players = filterbyPosition(new_id)
+        var output = " "
+        output += `<div class="leaderboard" onclick = "hide_col()">
+        <h1>
+        ${new_id}
+        </h1>
+        <ol>`
+        for (var i = 0; i < filtered_players.length; i++) {
+        output += `
+        <li data-item='${JSON.stringify(filtered_players[i])}' onclick="addplayer(this, '${id}')">
+            <img class="head-image" src="${filtered_players[i].Player_image}" >
+            <mark>${filtered_players[i].Player_name}</mark>
+            <small>$ ${filtered_players[i].Player_price} m</small>
+        </li>   
+        `
+        }
+        output += '</ol></div>'
+        popup.innerHTML = output
+        popup.classList.toggle("show");
+        popup.style.display = "block"
+    }
+
+
+    function hide_col(){
+    var element = document.getElementById("myPopup");
+    element.style.display = "none";
+    }
+
+
+
+
+
+    //formation logic
+
+    function formation(){
+
+    document.getElementById('fantasy-price').textContent = 12
+    addPlayerToArray('reset')
+    map = new Map()
+    
+    let defender = " "
+    let midfielder = " "
+    let forward = " "
+
+    let position  = {'GK': 1, 'DF': 0, 'MF': 0, 'FW':0}
+    var formation = document.getElementById("formation").value;
+    var numb = formation.match(/\d/g);
+    numb = numb.join("");
+    var array = Array.from(String(numb), Number)
+    position['DF'] = array[1]
+    position['MF'] = array[2]
+    position['FW'] = array[3]
+
+    GK.innerHTML = `<div class="player" id="GK" onclick="myFunction(this.id)"><div class="select-card"><img class="card-image" src="/img/add.png" ><br>GK</div></div>`
+
+    for (let index = 0; index < position['DF']; index++) {
+        defender += `<div class="player" id="DF DF${index}" onclick="myFunction(this.id)"><div class="select-card"><img class="card-image" src="/img/add.png" ><br>DF</div></div>`
+    }
+    DF.innerHTML = defender
+
+    for (let index = 0; index < position['MF']; index++) {
+        midfielder += `<div class="player" id="MF MF${index}" onclick="myFunction(this.id)"><div class="select-card"><img class="card-image" src="/img/add.png" ><br>MF</div></div>`
+    }
+    MF.innerHTML = midfielder
+
+    for (let index = 0; index < position['FW']; index++) {
+        forward += `<div class="player" id="FW FW${index}" onclick="myFunction(this.id)"><div class="select-card"><img class="card-image" src="/img/add.png" ><br>FW</div></div>`
+    }
+    FW.innerHTML = forward
+
+    }
+
+
+    //add player
+    function addplayer(data, id){
+    let player = JSON.parse(data.dataset.item)  
+    let player_id = document.getElementById(id)
+    
+    //player repeat prevent
+    if(map[player.Player_name]){
+        return
+    }
+
+    if(map[id]){
+        user_pick = JSON.parse(user_pick)
+        for (let [i, players] of user_pick['theTeam'].entries()) {
+        if (players.Player_name == map[id]){
+            map[players.teamName] -=1
+            price_tracker(-players.Player_price)
+            user_pick['theTeam'].splice(i, 1);   
+            user_pick = JSON.stringify(user_pick)   
+            delete(map[players.Player_name])
+        }
+    }
+    }
+
+
+
+    //player name splitting
+    let name = player.Player_name
+    let arr = name.split(' ');
+    if(arr[1]){
+        name = arr[1]
+    }
+    else{
+        name = arr[0]
+    }
+
+    //team count
+    if(map[player.teamName] == 3){
+        return
+    }else if(!map[player.teamName]){
+        map[player.teamName] = 1
+    }else{
+        map[player.teamName] +=1
+    }
+
+
+    //final decision
+    let decision = price_tracker(player.Player_price)
+    if(decision == false){
+        return
+    }
+    else{
+        player_id.innerHTML = " "
+        player_id.innerHTML = `<div class="select-card"><img class="card-image" src="${player.Player_image}" ><br>${name}<br>$${player.Player_price}m</div>`
+    
+        addPlayerToArray(player)
+        map[player.Player_name] = player.Player_name
+        map[id] = player.Player_name
+    }
+    }
+
+
+
+    //add player to array for sending it to server
+    function addPlayerToArray(player){
+    if(player == 'reset'){
+        user_pick = '{"theTeam":[]}'
+        return user_pick
+    }else{
+        user_pick = JSON.parse(user_pick)
+        user_pick['theTeam'].push(player);
+        var player_number = document.getElementById('player-number')
+        var num = user_pick['theTeam'].length
+        if(num == 5){
+        document.getElementById('btn').style.display = 'block'
+        }
+        player_number.innerHTML = num
+        user_pick = JSON.stringify(user_pick)
+        return user_pick
+    }
+    }
+
+
+    //price tracker
+    function price_tracker(money){
+    let price_div = document.getElementById('fantasy-price')
+    let price = document.getElementById('fantasy-price').textContent
+    price = parseFloat(price)
+    
+    price = price - money
+    if(price<0){
+        return false
+    }else{
+    price_div.innerHTML = price.toFixed(1)
+    }
+    }
+
+
+
+    let send_data = document.querySelectorAll('.btn')
+    send_data.forEach((btn)=>{
+    btn.addEventListener('click',(e)=>{
+        var data = JSON.parse(user_pick) 
+        fetch('http://localhost:4000/fantasy', {
+            method: 'POST',
+            redirect: 'follow',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:user_pick
+        }).then(res=>{
+        window.location.replace(res.url);
+        });
+    })
+    })         
+</script>
 
 </body>
 </html>
