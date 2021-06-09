@@ -16,27 +16,9 @@
     <section class="main-body">
 
         <div id="info" class="info">
-            <div class="budget">
-                <div class="inn">Remaining budget
-                <p>$<span id="fantasy-price">12</span>m</p></div>
-            </div>
-            <div class="players-number">
-                <div class="inn">players-number
-                <p><span id="player-number">0</span>/5</p></div>
-            </div>
         </div>
 
         <div class="formation">
-            <div class="select-formation">
-                <label for="formation">Choose Formation</label>
-                <br>
-                <select id="formation" name="formations" onchange="formation()">
-                <option value="none" selected disabled hidden>Select A Formation</option>
-                <option value="1-2-1-1">1-2-1-1</option>
-                <option value="1-1-2-1">1-1-2-1</option>
-                <option value="1-1-1-2">1-1-1-2</option>
-                </select>
-            </div>
             <div class="pitch">
                 <div class="top-box"></div>
                 <div class="top-inner-box"></div>
@@ -47,19 +29,31 @@
                 <div class="player-card">
                     <div class="player-card-section">
                         <div id="forward" class="FW">
-                        </div>
-                    </div>
-                    <div class="player-card-section">
-                        <div id="mid" class="MF">
-                        </div>
-                    </div>
-                    <div class="player-card-section">
-                        <div id="def" class="DF">
+                            <% FW.forEach(function(rank){ %> 
+                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br><%= rank.Player_name %></div></div>
+                            <% }) %>
 
                         </div>
                     </div>
                     <div class="player-card-section">
+                        <div id="mid" class="MF">
+                            <% MF.forEach(function(rank){ %> 
+                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br><%= rank.Player_name %></div></div>
+                            <% }) %>
+                        </div>
+                    </div>
+                    <div class="player-card-section">
+                        <div id="def" class="DF">
+                            <% DF.forEach(function(rank){ %> 
+                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br><%= rank.Player_name %></div></div>
+                            <% }) %>
+                        </div>
+                    </div>
+                    <div class="player-card-section">
                         <div id="goal" class="GK">
+                            <% GK.forEach(function(rank){ %> 
+                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br><%= rank.Player_name %></div></div>
+                            <% }) %>
                         </div>
                         <div class="popup">
                             <span class="popuptext" id="myPopup"></span>
@@ -69,13 +63,11 @@
             </div>
         </div>
         <div>
-            <button class="btn" id="btn" type="submit">Submit</button>
         </div>
     </section>
 </div>
 </div>
 
-    <script src="/js/fantasy.js"></script>
 
 </body>
 </html>

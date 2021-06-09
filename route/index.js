@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch')
-
+var user_data
 
 // Middleware
 const { auth, notAuth } = require('../middleware/auth');
@@ -26,7 +26,7 @@ router.get('/rank', auth, (req, res)=>{
     }); 
 })
 
-router.get('/fantasy', auth, (req, res)=>{
+router.get('/fantasy/:team1/:team2', (req, res)=>{
     fetch('http://localhost:4000/api/Players/Spain/Portugal')
     .then(res => res.json())
     .then(players => {
@@ -34,6 +34,19 @@ router.get('/fantasy', auth, (req, res)=>{
     }); 
 })
 
+router.get('/team', (req, res)=>{
+    res.render('components/team', {GK:filterbyPosition(user_data, 'GK'),DF:filterbyPosition(user_data, 'DF'), MF: filterbyPosition(user_data, 'MF'), FW:filterbyPosition(user_data, 'FW')})
 
+})
+
+router.post('/fantasy', (req, res)=>{
+    user_data = req.body['theTeam']
+    res.redirect('/team')
+})
+
+function filterbyPosition(players, position){
+    var result = players.filter( element => element.Player_position ==position)
+    return result
+}
 
 module.exports = router;
