@@ -42,7 +42,6 @@ router.get('/fixtures', (req, res)=>{
     fetch('http://localhost:4000/api/matches/2021-06-23')
     .then(res => res.json())
     .then(matches => {
-        console.log(matches)
         res.render('components/fixtures', {matches: matches})
     }); 
     

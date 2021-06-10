@@ -30,7 +30,7 @@ async function  getMatchPlayers(countryName1, countryName2){
         let pool = await sql.connect(config)
 
         let teamId  = await pool.request().query(`SELECT a.teamId from Country as a where a.teamName = '${countryName1}'  or  a.teamName ='${countryName2}'`)
-        let teams = await pool.request().query(`SELECT Player_name, Player_position, teamName, Player_image, Player_price FROM players_db as p inner join Country as c on p.Country_id = c.teamId  where p.Country_id=${teamId.recordset[0].teamId} or p.Country_id=${teamId.recordset[1].teamId}`)
+        let teams = await pool.request().query(`SELECT Player_id, Player_name, Player_position, teamName, Player_image, Player_price FROM players_db as p inner join Country as c on p.Country_id = c.teamId  where p.Country_id=${teamId.recordset[0].teamId} or p.Country_id=${teamId.recordset[1].teamId}`)
         return teams.recordset
     }catch(err){
         console.log(err)
