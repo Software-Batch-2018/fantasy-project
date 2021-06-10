@@ -33,9 +33,6 @@ module.exports = function(passport) {
             let request = await sql.connect(config)
             let rows = await request.query(`SELECT * FROM users WHERE user_id ='${id}'`) 
             const user = rows.recordset[0]
-            if(!user.matches){
-                user.matches = new Map()
-            }
             return done(null, user);
         } catch(err) {
             return done(err);

@@ -1,7 +1,8 @@
 const dbOperation = require('../controller/teamController')
 var express = require('express')
 const router = express.Router()
-
+const config = require('../config/dbconfig')
+const sql = require('mssql/msnodesqlv8')
 const { auth, notAuth } = require('../middleware/auth');
 
 router.get('/teams',(req, res)=>{
@@ -10,11 +11,17 @@ router.get('/teams',(req, res)=>{
     })
 })
 
-router.get('/Players/:matchid', auth,(req, res)=>{
+router.get('/Players/:matchid', auth, async(req, res)=>{
     matchId = req.params.matchid
-    dbOperation.getMatchPlayers(matchId).then(result=>{
-        res.render('components/fantasy', {players: result})
-    })
+    let pool = await sql.connect(config)
+    let getData = await pool.request().query(`select * from Fantasy_Team where user_id=${req.user.user_id} and match_id=${matchId} `)
+    if(getData.recordset.length >=1){
+        res.redirect(`/api/fantasyTeam/${matchId}`)
+    }else{  
+        dbOperation.getMatchPlayers(matchId).then(result=>{
+            res.render('components/fantasy', {players: result})
+        })
+    }
 })
 
 // get users team
