@@ -30,29 +30,65 @@
                     <div class="player-card-section">
                         <div id="forward" class="FW">
                             <% FW.forEach(function(rank){ %> 
-                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br><%= rank.Player_name %></div></div>
+                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br>
+                                    <% let name = rank.Player_name %>
+                                    <% let arr = rank.Player_name.split(' '); %>
+                                    <% if(arr[1]){ %>
+                                    <%    name = arr[1] %>
+                                    <% }else{ %>
+                                    <% name = arr[0] %>
+                                    <%  } %> 
+                                    <%= name %> 
+                                </div>
+                            </div> 
                             <% }) %>
-
                         </div>
                     </div>
                     <div class="player-card-section">
                         <div id="mid" class="MF">
                             <% MF.forEach(function(rank){ %> 
-                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br><%= rank.Player_name %></div></div>
+                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br>
+                                    <% let name = rank.Player_name %>
+                                    <% let arr = rank.Player_name.split(' '); %>
+                                    <% if(arr[1]){ %>
+                                    <%    name = arr[1] %>
+                                    <% }else{ %>
+                                    <% name = arr[0] %>
+                                    <%  } %> 
+                                    <%= name %> 
+                                </div></div>
                             <% }) %>
                         </div>
                     </div>
                     <div class="player-card-section">
                         <div id="def" class="DF">
                             <% DF.forEach(function(rank){ %> 
-                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br><%= rank.Player_name %></div></div>
+                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br>
+                                    <% let name = rank.Player_name %>
+                                    <% let arr = rank.Player_name.split(' '); %>
+                                    <% if(arr[1]){ %>
+                                    <%    name = arr[1] %>
+                                    <% }else{ %>
+                                    <% name = arr[0] %>
+                                    <%  } %> 
+                                    <%= name %> 
+                                </div></div>
                             <% }) %>
                         </div>
                     </div>
                     <div class="player-card-section">
                         <div id="goal" class="GK">
                             <% GK.forEach(function(rank){ %> 
-                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br><%= rank.Player_name %></div></div>
+                                <div class="player" id="GK"><div class="select-card"><img class="card-image" src="<%= rank.Player_image %> " ><br>
+                                    <% let name = rank.Player_name %>
+                                    <% let arr = rank.Player_name.split(' '); %>
+                                    <% if(arr[1]){ %>
+                                    <%    name = arr[1] %>
+                                    <% }else{ %>
+                                    <% name = arr[0] %>
+                                    <%  } %> 
+                                    <%= name %> 
+                                </div></div>
                             <% }) %>
                         </div>
                         <div class="popup">

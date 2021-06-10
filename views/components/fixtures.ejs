@@ -25,23 +25,23 @@
               <h4>Group Match</h4>
             </div>
             <div id='time-info-part'>
-              <h4>Today, 9:00 PM</h4>
+              <h4>Today, <%= rank.Time %> </h4>
           </div>
         </div>
         <div id='card-content-part'>
             <div id='first-team'>
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/1200px-Flag_of_France.svg.png">
+                <%= rank.team1 %>
             </div>
             <div id='match-res'>
                 <h2 id='first-team-res' class='res-h2'>V</h2>
                 <h2 id='second-team-res' class='res-h2'>S</h2>
             </div>
             <div id='second-team'>
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1200px-Flag_of_Germany.svg.png">
+              <%= rank.team2 %>
             </div>
         </div>
         <div id='show-more-btn-part'>
-            <a href="/fantasy/Germany/France">
+            <a href="/api/Players/<%= rank.Match_id %> ">
             <button>
                 Create Fantasy
             </button>

@@ -29,8 +29,9 @@ app.use(cors())
 //session config
 app.use(session({
     secret : 'kusaljr',
-    resave : false,
-    saveUninitialized : false
+    resave : true,
+    saveUninitialized : true
+
 }));
 
 

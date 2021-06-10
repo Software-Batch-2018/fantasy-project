@@ -270,13 +270,15 @@
     }
     }
 
+    var match_id = window.location.pathname
+    let match_arr = match_id.split('/');
 
 
     let send_data = document.querySelectorAll('.btn')
     send_data.forEach((btn)=>{
     btn.addEventListener('click',(e)=>{
         var data = JSON.parse(user_pick) 
-        fetch('http://localhost:4000/fantasy', {
+        fetch(`http://localhost:4000/fantasy/${match_arr[3]}`, {
             method: 'POST',
             redirect: 'follow',
             headers: {

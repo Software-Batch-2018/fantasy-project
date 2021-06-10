@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch')
-var user_data
+const config = require('../config/dbconfig')
+const sql = require('mssql/msnodesqlv8')
 
 // Middleware
 const { auth, notAuth } = require('../middleware/auth');
@@ -9,6 +10,7 @@ const { auth, notAuth } = require('../middleware/auth');
 
 //main page
 router.get('/', auth, (req, res) => {
+    console.log(req.user.matches)
     res.render('index', {
         name : req.user.username,
         id : req.user.user_id
@@ -26,35 +28,15 @@ router.get('/rank', auth, (req, res)=>{
     }); 
 })
 
-router.get('/fantasy/:team1/:team2', (req, res)=>{
-    fetch('http://localhost:4000/api/Players/Spain/Portugal')
-    .then(res => res.json())
-    .then(players => {
-        res.render('components/fantasy', {players: players})
-    }); 
+
+
+router.post('/fantasy/:match_id', auth,async (req, res)=>{
+    var user_data = req.body['theTeam']
+    let pool = await sql.connect(config)
+    req.user.matches[req.params.match_id] = req.params.match_id
+    let insert_data = await pool.request().query(`Insert into Fantasy_team values (${ req.user.user_id}, ${req.params.match_id}, ${user_data[0].Player_id},${user_data[1].Player_id},${user_data[2].Player_id},${user_data[3].Player_id},${user_data[4].Player_id})`)
+    res.redirect(`/api/fantasyTeam/${req.params.match_id}`)
 })
 
-router.get('/team', (req, res)=>{
-    res.render('components/team', {GK:filterbyPosition(user_data, 'GK'),DF:filterbyPosition(user_data, 'DF'), MF: filterbyPosition(user_data, 'MF'), FW:filterbyPosition(user_data, 'FW')})
-})
-
-router.get('/fixtures', (req, res)=>{
-    fetch('http://localhost:4000/api/matches/2021-06-23')
-    .then(res => res.json())
-    .then(matches => {
-        res.render('components/fixtures', {matches: matches})
-    }); 
-    
-})
-
-router.post('/fantasy', (req, res)=>{
-    user_data = req.body['theTeam']
-    res.redirect('/team')
-})
-
-function filterbyPosition(players, position){
-    var result = players.filter( element => element.Player_position ==position)
-    return result
-}
 
 module.exports = router;
