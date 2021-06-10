@@ -48,7 +48,7 @@ async function  getMatchPlayers(match_id){
 async function  getMatches(date){
     try{
         let pool = await sql.connect(config)
-        let teams = await pool.request().query(`SELECT Match_id,c.teamName as team1, c2.teamName as team2, Time FROM Matches as m 
+        let teams = await pool.request().query(`SELECT Match_id,c.teamName as team1, c2.teamName as team2, Time, c.Flag as flag1, c2.Flag as flag2 FROM Matches as m 
         inner join Country as c 
         on m.Team1_id = c.teamId 
         inner join Country as c2 
