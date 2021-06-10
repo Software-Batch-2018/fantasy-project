@@ -29,7 +29,7 @@ body {
   );
   background-size: 100% 20vmin;
   border:solid 1px #fff;
-  height:80vh;
+  height:76vh;
   position:relative;
   width:100vw;
 }
@@ -122,9 +122,10 @@ body {
 
 .info
 {
+  position: relative;
+  margin-top: 2vh;
   min-height: 10vh;
   max-height: 10vh;
-  max-width: 96vw;
 
 }
 
@@ -168,7 +169,7 @@ body {
 .player-card-section .GK
 {
   position: absolute;
-  top:60vh;left: 0;right: 0;
+  top:56vh;left: 0;right: 0;
 }
 
 .player
@@ -189,11 +190,6 @@ body {
   position: absolute;
   top:50vh;
 }
-
-select
-{
-}
-
 option
 {
   background: transparent;
@@ -393,6 +389,8 @@ z-index: 1;
 #formation
 {
 margin-top: 3px;
+background-color: rgba(0, 0, 0, 0.466);
+color: #fff;
 }
 
 .head-image
@@ -466,5 +464,21 @@ p
 .btn{
   display: none;
   position: absolute;
-  z-index: 10;
+  bottom: 10vh;
+  right: 3vw;
+  z-index: 20;
+  border-radius: 5px;
+  height: 5vh;
+  width: 20vw;
+  background-color: rgba(0, 0, 0, 0.466);
+  color: #fff;
+}
+
+.caution
+{
+  background-color: rgb(212, 81, 81);
+  height: 5vh;
+  padding: 1.5vh;
+  text-align: center;
+  font-weight: 400;
 }

@@ -1,12 +1,23 @@
+html
+{
+	background: linear-gradient(to bottom, #eee, #ddd);
+}
+
+body
+{
+	background: linear-gradient(to bottom, #eee, #ddd);
+}
+
 /* Main menu positionning */
 .main-nav {
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
     text-align: center;
-    background: #FFF;
     opacity: 0;
     z-index: -1;
     visibility: hidden;
@@ -22,10 +33,9 @@
 /* Yellow band effect */
 .main-nav::before {
 	 content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    position: fixed;
+	min-height: 100vh;
+	min-width: 100vw;
     right: -15px;
     background-color: #7ee8fa;
 	background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
@@ -100,7 +110,7 @@
 /* Burger Style: @see: https://codepen.io/CreativeJuiz/full/oMZNXy */
 .open-main-nav {
 	position: absolute;
-	top: 15px;
+	top: 5%;
 	padding-top: 20px;
 	right: 15px;
 	z-index: 1000;
@@ -168,18 +178,16 @@
 
 .device {
 	position: relative;
-	width: 345px;
-	height: 110vh;
-	background: #FFF;
+	width: 100vw;
+	height: 100vh;
+	background: linear-gradient(to bottom, #eee, #ddd);
 	border: 1px solid #EEE;
 	border-radius: 3px;
 	box-shadow: 0 0 0 10px rgba(0,0,0,.1);
 }
 
 .container {
-	position: absolute;
-	top: 3%; right: 0;
-	bottom: 0; left: 0;
+	padding-bottom: 20px;
 	background: linear-gradient(to bottom, #eee, #ddd);
 }
 
@@ -224,4 +232,17 @@ body {
 
 .btn-logout:hover{
 	cursor: pointer;
+}
+
+.main-head
+{
+  z-index: 100;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  color: #181c26;
+  height: 12vh;
+  width: 100%;
+  background-color: #7ee8fa;
+  background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
 }
