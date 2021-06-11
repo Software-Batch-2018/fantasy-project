@@ -191,10 +191,10 @@ function price_tracker(money){
 }
 
 
-
 let send_data = document.querySelectorAll('.btn')
 send_data.forEach((btn)=>{
   btn.addEventListener('click',(e)=>{
+    $('#btn').hide();
       fetch('http://localhost:4000/fantasy/', {
         method: 'POST',
         redirect: 'follow',

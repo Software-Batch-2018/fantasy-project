@@ -100,6 +100,7 @@
       transform: translate(0%, 0%);
       margin: 1vh auto;
       width: 80%;
+      max-height: max-content;
     }
     #card #card-content-part{
 
@@ -130,6 +131,5 @@
     margin-top: 12vh;
     min-height: 85vh;
     max-height: 85vh;
-    display: grid;
     overflow-y: scroll;
   }
