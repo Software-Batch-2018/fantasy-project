@@ -6,6 +6,7 @@ const auth = (req, res, next) => {
     res.redirect('/users/login');
 }
 
+
 const notAuth = (req, res, next) => {
     if(req.isAuthenticated()) {
         return res.redirect('/');

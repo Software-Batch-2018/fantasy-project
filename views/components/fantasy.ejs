@@ -69,7 +69,7 @@
             </div>
         </div>
         <div>
-            <button class="btn" id="btn" type="submit">Submit</button>
+            <button class="btn" id="btn" type="button" onclick="submit_data()">Submit</button>
         </div>
         <div class="caution">
             ! Once Submitted No Modifications Are Allowed !
@@ -94,7 +94,9 @@
 
     var map = new Map()
     var user_pick = '{"theTeam":[]}'
+    var player_number = document.getElementById('player-number')
 
+    var num 
 
     function filterbyPosition(position){
         var result = players.filter( element => element.Player_position ==position)
@@ -102,6 +104,7 @@
     }
 
     function myFunction(id) {
+
         var popup = document.getElementById("myPopup");
         var new_id = id.substring(0, 2)
         var filtered_players = filterbyPosition(new_id)
@@ -139,6 +142,8 @@
     //formation logic
 
     function formation(){
+    num = 0
+    player_number.innerHTML = num
 
     document.getElementById('fantasy-price').textContent = 12
     addPlayerToArray('reset')
@@ -247,8 +252,7 @@
     }else{
         user_pick = JSON.parse(user_pick)
         user_pick['theTeam'].push(player);
-        var player_number = document.getElementById('player-number')
-        var num = user_pick['theTeam'].length
+        num = user_pick['theTeam'].length
         if(num == 5){
         document.getElementById('btn').style.display = 'block'
         }
@@ -277,9 +281,7 @@
     let match_arr = match_id.split('/');
 
 
-    let send_data = document.querySelectorAll('.btn')
-    send_data.forEach((btn)=>{
-    btn.addEventListener('click',(e)=>{
+    function submit_data(){
         var data = JSON.parse(user_pick) 
         fetch(`http://localhost:4000/fantasy/${match_arr[3]}`, {
             method: 'POST',
@@ -291,8 +293,9 @@
         }).then(res=>{
         window.location.replace(res.url);
         });
-    })
-    })         
+    }
+        
+      
 </script>
 
 </body>
