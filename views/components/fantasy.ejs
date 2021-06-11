@@ -70,7 +70,6 @@
         </div>
         <div>
             <div class="loading" id="loader">Loading&#8230;</div>
-            <button class="btn" id="btn" onclick="hidebtn()" type="submit">Submit</button>
             <button class="btn" id="btn" type="button" onclick="submit_data()">Submit</button>
         </div>
         <div class="caution">
@@ -82,11 +81,7 @@
 
 
 <script>
-    function hidebtn()
-    {
-        document.getElementById("btn").style.display = "none";
-        document.getElementById("loader").style.display = "inline";
-    }
+
     var players = <%-JSON.stringify(players)%>;
 
     let GK = document.getElementById('goal')
@@ -289,6 +284,8 @@
 
 
     function submit_data(){
+        document.getElementById("btn").style.display = "none";
+        document.getElementById("loader").style.display = "inline";
         var data = JSON.parse(user_pick) 
         fetch(`http://localhost:4000/fantasy/${match_arr[3]}`, {
             method: 'POST',
