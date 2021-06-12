@@ -8,7 +8,7 @@ const user = require('./route/user')
 const flash = require('express-flash');
 const methodOverride = require('method-override');
 const cors = require('cors')
-
+const point = require('./route/point')
 //port
 const PORT = 4000
 
@@ -51,6 +51,11 @@ app.use('/', index)
 
 //user route
 app.use('/users', user)
+
+//point automation
+
+app.use('/endpoint', point)
+
 
 
 

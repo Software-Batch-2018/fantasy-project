@@ -53,8 +53,9 @@ async function  getMatches(date){
         on m.Team1_id = c.teamId 
         inner join Country as c2 
         on m.Team2_id = c2.teamId  
-        where m.Date='${date}'
+        where m.Date_fantasy='${date}'
         `)
+        
         return teams.recordset
     }catch(err){
         console.log(err)
@@ -76,16 +77,23 @@ async function  getFantasyTeamData(matchid, userid){
     try{
         matchid = parseInt(matchid)
         let pool = await sql.connect(config)
-        let fantasy_team = await pool.request().query(`select   Player_id,Player_name, Player_image, Player_position,Player_price, teamName from Fantasy_Team as ft
-        inner join players_db as pd
+        let fantasy_team = await pool.request().query(`
+        select   pd.Player_id,Player_name, Player_position,Player_image, Player_price, teamName, 
+        (CASE WHEN points IS NULL THEN 0 ELSE points END) as points
+        from Fantasy_Team  as ft
+        left join players_db as pd
         on ft.playerId_1 = pd.Player_id or 
         ft.playerId_2 = pd.Player_id or 
         ft.playerId_3 = pd.Player_id or 
         ft.playerId_4 = pd.Player_id or 
         ft.playerId_5 = pd.Player_id 
-        inner join Country as c
+        left join Country as c
         on pd.Country_id = c.teamId
-        where user_id = ${userid} and ft.match_id = ${matchid}`)
+        left join Match_Points as mp
+        on
+        pd.Player_id = mp.player_id
+        where user_id = ${userid} and ft.match_id = ${matchid}
+        `)
         return fantasy_team.recordset
     }catch(err){
         console.log(err)

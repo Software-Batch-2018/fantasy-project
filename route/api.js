@@ -30,7 +30,13 @@ router.get('/fantasyTeam/:match_id', auth, (req, res)=>{
     user_id = req.user.user_id
 
     dbOperation.getFantasyTeamData(matchId, user_id).then(data=>{
-        res.render('components/team',{GK:filterbyPosition(data, 'GK'),DF:filterbyPosition(data, 'DF'), MF: filterbyPosition(data, 'MF'), FW:filterbyPosition(data, 'FW')})
+        var sum = 0
+        data.forEach(element => {
+            
+            sum +=element.points
+            
+        });
+        res.render('components/team',{GK:filterbyPosition(data, 'GK'),DF:filterbyPosition(data, 'DF'), MF: filterbyPosition(data, 'MF'), FW:filterbyPosition(data, 'FW'), total: sum})
     })
 })
 
@@ -47,10 +53,18 @@ router.get('/Players/:country', auth,(req, res)=>{
     })
 })
 
-router.get('/matches/:date',auth, (req, res)=>{
-    date = req.params.date
-    dbOperation.getMatches(date).then(result=>{
-        res.render('components/fixtures', {matches: result})
+router.get('/matches', (req, res)=>{
+    // `date` is a `Date` object
+    const formatYmd = date => date.toISOString().slice(0, 10);
+    var today = formatYmd(new Date());
+    
+    var date = new Date();
+    var time = (date.toLocaleString('en-GB'));
+
+    time = (time.slice(12,-6))
+   
+    dbOperation.getMatches(today).then(result=>{
+        res.render('components/fixtures', {matches: getActualMatches(time, result)})
     })
 })
 
@@ -60,5 +74,19 @@ router.get('/rank',(req, res)=>{
     })
 })
 
+
+function getActualMatches(time, result){
+    var list = []
+    result.forEach(element => {
+        var matchTime = element.Time
+        matchTime = matchTime.slice(0, -3)
+
+        if(parseInt(matchTime)==0 || time <= matchTime ){
+            list.push(element)
+        }
+    });
+    return list
+
+}
 
 module.exports = router

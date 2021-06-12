@@ -1,3 +1,4 @@
+
 var config = {
   server: "fantasypu.database.windows.net", // Use your SQL server name
   database: "fantasy", // Database to connect to
@@ -9,4 +10,16 @@ var config = {
     }
  };
 
+ /*
+
+ var config = {
+  server: 'localhost',
+  driver: 'msnodesqlv8',
+  database: 'fantasy',
+
+  options: {
+    trustedConnection: true
+  }
+};
+*/
 module.exports = config
