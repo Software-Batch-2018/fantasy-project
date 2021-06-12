@@ -53,7 +53,7 @@ router.get('/Players/:country', auth,(req, res)=>{
     })
 })
 
-router.get('/matches', (req, res)=>{
+router.get('/matches', auth, (req, res)=>{
     // `date` is a `Date` object
     const formatYmd = date => date.toISOString().slice(0, 10);
     var today = formatYmd(new Date());

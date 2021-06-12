@@ -19,12 +19,29 @@ router.get('/', auth, (req, res) => {
 
 
 //rank page
-router.get('/rank', auth, (req, res)=>{
-    fetch('http://localhost:4000/api/rank')
-    .then(res => res.json())
-    .then(rank => {
-        res.render('components/rank', {rank: rank})
-    }); 
+router.get('/rank', auth, async(req, res)=>{
+    let pool = await sql.connect(config)
+    let getData = await pool.request().query(`select u.username,
+    (CASE WHEN sum(points) IS NULL THEN 0 ELSE sum(points) END)
+     as points
+    from Fantasy_Team  as ft
+    left join players_db as pd
+    on ft.playerId_1 = pd.Player_id or 
+    ft.playerId_2 = pd.Player_id or 
+    ft.playerId_3 = pd.Player_id or 
+    ft.playerId_4 = pd.Player_id or 
+    ft.playerId_5 = pd.Player_id 
+    left join Country as c
+    on pd.Country_id = c.teamId
+    left join Match_Points as mp
+    on
+    pd.Player_id = mp.player_id
+    left join users as u
+    on u.user_id = ft.user_id
+    group by (username) 
+    order by points desc 
+    `)
+    res.render('components/rank', {rank:getData.recordset})
 })
 
 router.get('/userFantasy', auth,async (req, res)=>{
