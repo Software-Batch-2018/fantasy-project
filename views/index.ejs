@@ -26,19 +26,27 @@
             
             </div>
             <br>
+            <div style="text-align:center; display:none;">
+              <span class="dot"></span> 
+              <span class="dot"></span> 
+              <span class="dot"></span> 
+            </div>
     </section>
     <section class="home-fantasy">
       <a href="/api/matches/"><div class="bg-fantasy">Create Your Team Now</div></a>
     </section>
     <section class="home-news">
       <h3 style="text-decoration: underline;">NEWS</h3>
+      <% news.forEach(function(news){ %>
+      <a href="<%= news.url %> "> 
       <div class="news-card">
         <div class="main-news">
-          <h4>Heading</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat voluptatibus facilis maxime aliquam sed necessitatibus amet minima obcaecati magni, nulla, repellendus voluptatum quae nam unde odit inventore dolorem nemo! Quos.</p>
+          <h4><%= news.title %> </h4>
         </div>
-        <div class="news-image"><img class="news-img" src="https://editorial.uefa.com/resources/0265-115492e629a4-d74889fdd6e9-1000/euro_fixtures.jpg" ></div>
+        <div class="news-image"><img class="news-img" src="<%= news.image %> " ></div>
       </div>
+      </a>
+      <% }) %> 
     </section>
   </div>
 </div>

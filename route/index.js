@@ -10,10 +10,12 @@ const { auth, notAuth } = require('../middleware/auth');
 
 //main page
 router.get('/', auth, (req, res) => {
-    res.render('index', {
-        name : req.user.username,
-        id : req.user.user_id
+    fetch('https://duckduckgo.com/news.js?l=us-en&o=json&noamp=1&q=euro%20cup%20latest&vqd=3-35900722400132575508066771564762946411-319083102909836812520935867132683714843&p=-1&df=')
+    .then(res => res.json())
+    .then(json =>{
+        res.render('index', {news: json.results})
     });
+
 });
 
 
