@@ -169,7 +169,7 @@ body {
 .player-card-section .GK
 {
   position: absolute;
-  top:56vh;left: 0;right: 0;
+  top:56vh;left: 0;right: 0; bottom:0;
 }
 
 .player
