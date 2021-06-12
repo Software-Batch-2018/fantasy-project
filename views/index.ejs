@@ -9,11 +9,60 @@
 </head>
 <body>
     <%- include('./components/header') %> 
+    <section class="home-carousel">
+        <div class="slideshow-container">
 
-    <h1 class="home">Home Page</h1>
-
+            <div class="mySlides fade">
+              <img class="home-img" src="https://editorial.uefa.com/resources/0265-115492e629a4-d74889fdd6e9-1000/euro_fixtures.jpg" style="width:100%">
+            </div>
+            
+            <div class="mySlides fade">
+              <img class="home-img" src="https://i.ytimg.com/vi/pF1WKH-hZFg/maxresdefault.jpg" style="width:100%">
+            </div>
+            
+            <div class="mySlides fade">
+              <img class="home-img" src="https://gaming.uefa.com/en/uefaeuro2020fantasyfootball/static-assets/images/ucl-graphics.png" style="width:100%">
+            </div>
+            
+            </div>
+            <br>
+    </section>
+    <section class="home-fantasy">
+      <a href="/api/matches/"><div class="bg-fantasy">Create Your Team Now</div></a>
+    </section>
+    <section class="home-news">
+      <h3 style="text-decoration: underline;">NEWS</h3>
+      <div class="news-card">
+        <div class="main-news">
+          <h4>Heading</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat voluptatibus facilis maxime aliquam sed necessitatibus amet minima obcaecati magni, nulla, repellendus voluptatum quae nam unde odit inventore dolorem nemo! Quos.</p>
+        </div>
+        <div class="news-image"><img class="news-img" src="https://editorial.uefa.com/resources/0265-115492e629a4-d74889fdd6e9-1000/euro_fixtures.jpg" ></div>
+      </div>
+    </section>
+  </div>
 </div>
-</div>
-    
 </body>
 </html>
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 4000);
+}
+</script>

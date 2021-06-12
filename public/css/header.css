@@ -1,11 +1,11 @@
 html
 {
-	background: linear-gradient(to bottom, #eee, #ddd);
+	background: white;
 }
 
 body
 {
-	background: linear-gradient(to bottom, #eee, #ddd);
+	background: white;
 }
 
 /* Main menu positionning */
@@ -180,7 +180,7 @@ body
 	position: relative;
 	width: 100vw;
 	height: 100vh;
-	background: linear-gradient(to bottom, #eee, #ddd);
+	background: white;
 	border: 1px solid #EEE;
 	border-radius: 3px;
 	box-shadow: 0 0 0 10px rgba(0,0,0,.1);
@@ -188,7 +188,7 @@ body
 
 .container {
 	padding-bottom: 20px;
-	background: linear-gradient(to bottom, #eee, #ddd);
+	background: white;
 }
 
 html {
