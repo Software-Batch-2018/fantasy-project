@@ -123,6 +123,8 @@ async function getPlayersMap(match_id,goals, assists, cs, player_arr){
 
     let player_point = await pool.request().query(`INSERT INTO Match_Points (match_id, player_id, goals, assists) values ${editedText}`)
 
+    let match_status = await pool.request().query(`Update table Matches set status = 'Yes' where match_id = ${match_id}`)
+
     return 'OK'
 }
 
