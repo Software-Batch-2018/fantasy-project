@@ -12,7 +12,7 @@ It is made during 4th semester of Bachelors of Software Engineering!
 
 ##Contributors
 
-[Kusal Lamsal](https://github.com/kusaljr)
-[Milan Pokhrel](https://github.com/milan98080)
-[Saroj Aryal](https://github.com/joerush18)
+1. [Kusal Lamsal](https://github.com/kusaljr)
+2. [Milan Pokhrel](https://github.com/milan98080)
+3. [Saroj Aryal](https://github.com/joerush18)
 
