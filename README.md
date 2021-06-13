@@ -10,7 +10,7 @@ It is made during 4th semester of Bachelors of Software Engineering!
 ![UI](fantasy.PNG)
 
 
-##Contributors
+## Contributors
 
 1. [Kusal Lamsal](https://github.com/kusaljr)
 2. [Milan Pokhrel](https://github.com/milan98080)
