@@ -14,15 +14,24 @@ router.get('/teams',(req, res)=>{
 router.get('/Players/:matchid', auth, async(req, res)=>{
     matchId = req.params.matchid
     let pool = await sql.connect(config)
-    let getData = await pool.request().query(`select * from Fantasy_Team where user_id=${req.user.user_id} and match_id=${matchId} `)
-    if(getData.recordset.length >=1){
-        res.redirect(`/api/fantasyTeam/${matchId}`)
-    }else{  
-        dbOperation.getMatchPlayers(matchId).then(result=>{
-            res.render('components/fantasy', {players: result})
-        })
+
+    let status = await pool.request().query(`select status from Matches where match_id = ${matchId}`)
+    var match_status = status.recordset[0]
+
+    if(match_status.status == 'Yes'){
+        res.redirect('/api/matches')
+    }else{
+        let getData = await pool.request().query(`select * from Fantasy_Team where user_id=${req.user.user_id} and match_id=${matchId} `)
+        if(getData.recordset.length >=1){
+            res.redirect(`/api/fantasyTeam/${matchId}`)
+        }else{  
+            dbOperation.getMatchPlayers(matchId).then(result=>{
+                res.render('components/fantasy', {players: result})
+            })
+        }
     }
 })
+
 
 // get users team
 router.get('/fantasyTeam/:match_id', auth, (req, res)=>{
