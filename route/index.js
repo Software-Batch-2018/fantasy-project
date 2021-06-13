@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch')
 const config = require('../config/dbconfig')
-const sql = require('mssql/msnodesqlv8')
+const sql = require('mssql')
 
 // Middleware
 const { auth, notAuth } = require('../middleware/auth');

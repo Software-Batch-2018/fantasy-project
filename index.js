@@ -10,7 +10,7 @@ const methodOverride = require('method-override');
 const cors = require('cors')
 const point = require('./route/point')
 //port
-const PORT = 4000
+const PORT = process.env.PORT || 4000
 
 //db
 require('./config/dbconfig');

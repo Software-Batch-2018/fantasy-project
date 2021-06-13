@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express.Router()
 const config = require('../config/dbconfig')
-const sql = require('mssql/msnodesqlv8')
+const sql = require('mssql')
 const fetch = require('node-fetch');
 
 // player fetching from api first

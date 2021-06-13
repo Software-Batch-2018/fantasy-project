@@ -1,5 +1,5 @@
 const config = require('../config/dbconfig')
-const sql = require('mssql/msnodesqlv8')
+const sql = require('mssql')
 
 async function  getTeam(){
     try{

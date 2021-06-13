@@ -5,7 +5,7 @@ const config = require('../config/dbconfig')
 const bcrypt = require('bcryptjs')
 // Middleware
 const { auth, notAuth } = require('../middleware/auth');
-const sql = require('mssql/msnodesqlv8')
+const sql = require('mssql')
 
 const initializePassport = require('../middleware/passport-config');
 initializePassport (passport);
