@@ -198,7 +198,6 @@ body {
 	height: 100%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 }
 
 
@@ -246,3 +245,55 @@ body {
   background-color: #7ee8fa;
   background-image: linear-gradient(315deg, #7ee8fa 0%, #80ff72 74%);
 }
+
+@media all and (min-width: 800px) {
+	.device {
+	  display: none;
+	}
+
+	.inn
+      {
+        border-radius: 20px;
+        margin: auto;
+        margin-top: 10vh;
+        background-color: orangered;
+        min-height: 10vh;
+      }
+    
+      .inn2
+      {
+        margin-top: 30vh;
+      }
+    
+      .h2
+      {
+        color: white;
+        padding: 18px;
+        text-align: center;
+        font-size: 30px;
+      }
+    
+      .h3
+      {
+        color: white;
+        padding: 18px;
+        text-align: center;
+        font-size: 25px;
+        
+      }
+
+  body{
+  background: url(https://wallpapercave.com/wp/wp4732432.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  }
+  }
+
+  @media only screen and (max-width: 800px)
+    {
+        .inn{
+        display: none;
+        }
+    }
