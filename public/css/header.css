@@ -251,7 +251,7 @@ body {
 	  display: none;
 	}
 
-	.inn
+	.inna
       {
         border-radius: 20px;
         margin: auto;
@@ -293,7 +293,7 @@ body {
 
   @media only screen and (max-width: 800px)
     {
-        .inn{
+        .inna{
         display: none;
         }
     }
