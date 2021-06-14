@@ -56,7 +56,8 @@ router.get('/userFantasy', auth,async (req, res)=>{
      on m.Team1_id = c.teamId 
      inner join Country as c2 
      on m.Team2_id = c2.teamId  
-    where user_id = ${req.user.user_id}`)
+    where user_id = ${req.user.user_id}
+    order by m.Match_id desc`)
     res.render('components/userfantasy', {matches: getData.recordset})
 })
 
